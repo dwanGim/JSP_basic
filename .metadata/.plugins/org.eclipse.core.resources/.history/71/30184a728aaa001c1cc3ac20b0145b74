@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%!
+	// int randomNumber() 메서드를 선언해주세요.
+	// 정수 1~10까지의 난수를 발생시켜 리턴해줍니다.
+	
+	int randomNumber() {
+		int rn = (int)(Math.random() * 10) + 1;
+		return rn;
+		
+	}
+
+	String randomColor() {
+		// 난수를 발생시켜서 약 33% 확률로 "빨강"
+		// 약 33%확률로 "노랑"
+		// 약 33%확률로 "파랑"을 리턴하는 메서드를 선언해주세요.
+	
+		if (Math.random() <= 0.3333) {
+			String rc = "빨강";
+			return rc;
+		} else if(Math.random() <= 0.6666) {
+			String rc = "노랑";
+			return rc;
+		} else {
+			String rc = "파랑";
+			return rc;
+		}
+	}
+	
+
+	<h3>오늘의 행운의 숫자와 행운의 색깔</h3>
+	행운의 숫자 : <b><%= randomNumber() %></b> <br>
+	
+	행운의 색깔 : <b><%= randomColor() %></b>
+</body>
+</html>

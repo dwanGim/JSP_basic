@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%!
+	int ranNum() {
+		int rn = (int)(Math.random() * 10) + 1;
+		return rn;	
+}
+
+%>
+<%for(int i = 1; i<10; i++){%>
+	<h3>랜덤 구구단 (<%= ranNum() %>)</h3>
+	<p>이번에 나올 구구단은 <%= ranNum() %>단 입니다.<p>	
+<% }%>
+
+
+
+</body>
+</html>
