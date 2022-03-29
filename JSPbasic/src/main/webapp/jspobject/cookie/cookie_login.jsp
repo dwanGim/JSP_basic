@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	// 로그인을 이미 한 사용자가 로그인 창으로 다시 접근할 경우
+	// login_ok.jsp로 강제로 이동시켜서 로그인 창이 안보이게 해주세요.
+	// 힌트 : login_id
+		Cookie[] cookies = request.getCookies();
+		String cookieName = null;	
+	
+		if (cookies != null) {
+			for (Cookie cookie : cookies) { 
+				System.out.println(cookie.getName());
+		 		cookieName = cookie.getName();
+		 		if((cookieName != null) && (cookieName.equals("login_id"))) {
+		 		response.sendRedirect("http://localhost:8181/JSPbasic/jspobject/cookie/login_ok.jsp");
+		 		}
+			}
+		}
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
