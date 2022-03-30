@@ -5,20 +5,19 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	
-	System.out.println(id + pw);
+	String userId = id;
 	
 	if (id.equals("abc1234")) {
 		if(pw.equals("1111")) {
-
-			String userLogin = (String)session.getAttribute("session_id");
-			System.out.println(userLogin);
+			session.setAttribute("s_id", userId);
+			response.sendRedirect("http://localhost:8181/JSPbasic/jspobject/session/session_login_ok.jsp");
 		} else {
 			System.out.println("비밀번호가 틀렸습니다. 다시 입력해주세요.");
-			
+			response.sendRedirect("http://localhost:8181/JSPbasic/jspobject/session/session_pw_fail.jsp");
 		}
 	} else {
 		System.out.println("아이디가 없습니다. 다시 입력해주세요.");
-		
+		response.sendRedirect("http://localhost:8181/JSPbasic/jspobject/session/session_id_fail.jsp");
 	}
 %>
 <!DOCTYPE html>
