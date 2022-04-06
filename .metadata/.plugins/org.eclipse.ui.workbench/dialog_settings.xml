@@ -11,8 +11,9 @@
 		</list>
 	</section>
 	<section name="ZipFileImportWizard">
-		<item key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
+		<item key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="true"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\user\Downloads\20220405.zip"/>
 			<item value="C:\Users\user\Downloads\20220404_jsp2.zip"/>
 		</list>
 	</section>
