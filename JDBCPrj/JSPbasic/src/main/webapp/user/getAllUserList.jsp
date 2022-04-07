@@ -1,3 +1,6 @@
+<%@page import="com.ict.domain.UserVO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -5,6 +8,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	// 아래쪽에 원래 작성된 접속 로직 저장되어 있음
+	UserDAO dao = new UserDAO();// 생성과 동시에 Class.forName(db타입)
+	List<UserVO> userList = dao.getAllUserList(); // DB연결해 전체 목록 가져다 주고 종료.
+	out.println("DAO에서 전달받은 자료들 : " + userList);
+	
+%>
+
+<%	/*
 	String dbType = "com.mysql.cj.jdbc.Driver";
 	String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?severTimezone=UTC";
 	String connectId = "root";
@@ -30,7 +41,7 @@
 	} catch(Exception e) {
 		e.printStackTrace();
 	}
-
+	*/
 %>
 
 <!DOCTYPE html>
@@ -50,16 +61,9 @@
 			</tr>
 		</thead>
 		<tbody>
-
 			<tr>
-				<td><% while(rs.next()) { %></td>	
-				<td> <%= rs.getString(1) %>	</td>
-				<td> <%= rs.getString(2) %> </td>
-				<td> <%= rs.getString(3)%></td>
-				<td><%= rs.getString(4) %> </td>
+				<td></td>
 			</tr>
-	<%} %>
-
 		</tbody>
 	</table>
 

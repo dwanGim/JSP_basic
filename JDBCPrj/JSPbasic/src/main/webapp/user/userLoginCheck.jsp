@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 	String uId = request.getParameter("userId");
 	String uPw = request.getParameter("userPw");
 	
@@ -19,6 +19,8 @@ request.setCharacterEncoding("UTF-8");
 	
 	// ResultSet의 데이터를 자바 클래스로 교체할 수 있도록 UserVO 생성
 	UserVO user = new UserVO(); 
+
+	
 	
 	try {
 		Class.forName(dbType);
@@ -43,10 +45,13 @@ request.setCharacterEncoding("UTF-8");
 			user.setUserName(rs.getString(3));
 			user.setEmail(rs.getString(4));
 			
-			System.out.println(user.getUserId());
-			System.out.println(user.getUserPw());
-			System.out.println(user.getUserName());
-			System.out.println(user.getEmail());
+		
+			
+			
+			System.out.println("UserVO내부 자료 조회");
+			System.out.println(user);
+			System.out.println("------------------");
+			
 			String dbPw = user.getUserPw();
 			
 			
@@ -67,7 +72,7 @@ request.setCharacterEncoding("UTF-8");
 
 			rs.close(); // ResultSet, Connection, PreparedStatement는 .close();로 닫을 수 있음	
 		
-			} catch(Exception e){
+			} catch(Exception e) {
 			e.printStackTrace();
 			}
 %>

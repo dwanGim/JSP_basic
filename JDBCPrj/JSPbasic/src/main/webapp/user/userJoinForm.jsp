@@ -9,7 +9,6 @@
 </head>
 <row>
 <div class="col-sm-6">
-
 		<p>회원가입 페이지입니다. 아래 정보를 입력해주세요.</p>
 		<form action="http://localhost:8181/JSPbasic/user/userJoinCheck.jsp" method="post">
 			<input type="text" name="userId" placeholder="아이디를 입력해주세요." class="form-control form-control-lg">
