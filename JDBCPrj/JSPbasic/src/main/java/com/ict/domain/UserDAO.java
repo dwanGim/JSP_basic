@@ -31,6 +31,7 @@ public class UserDAO {
 	// userinfo 테이블의 row를 여러 개 받아올 수 있어야 합니다.
 	// 그래서 리턴 자료형으로 List<UserVO>를 리턴해야 합니다.
 	// UserVO가 row 한 개를 저장할 수 있으므로 UserVO를 여러 개 연달아 저장하는 자료가 필요합니다.
+	// 두 개 이상의 row를 불러올 수 있도록 List로 저장.
 	public List<UserVO> getAllUserList(){
 		// .jsp에서 로드할 때는 페이지가 옮겨가면 어차피 다 삭제되었기 때문에 .close()를
 		// 해도 안해도 큰 상관이 없었습니다.
@@ -69,6 +70,7 @@ public class UserDAO {
 				// 다 집어넣은 후 디버깅
 				System.out.println("집어넣은 후 : " + user);
 				userList.add(user);
+				
 			}
 			System.out.println("리스트에 쌓인 자료 체크 : " + userList);
 		} catch(Exception e) {
@@ -86,7 +88,48 @@ public class UserDAO {
 		return userList;
 		
 		
-	}
+	} // getAllUserList() END. 끝나는 지점.
 	
+	// 쿼리문 내에 ? 가 있다면
+	// ? 개수만큼 사용자가 입력하게 해야 합니다.
+	// 그래서 메서드에 요청 파라미터로
+	// ? 개수만큼 선언해줍니다.      이렇게 메서드 안에 userId를 요구 중이에요.
+	public UserVO getUserInfo(String userId) {
+		// try 블럭 진입 전에 .close()로 닫는 요소들을
+		// 모두 선언해주도록 코드를 고칩니다.
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		
+		// 유저정보를 저장할 수 있는 변수를 생성합니다.
+		UserVO user = new UserVO();
+		try {
+			con = DriverManager.getConnection(connectUrl, connectId, connectPw);
+			String sql = "SELECT * FROM userinfo WHERE user_id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			// rs 내부 데이터를 user변수에 옮겨 넣어야합니다.
+			if(rs.next()) {
+				user.setUserId(rs.getString(1));
+				user.setUserPw(rs.getString(2));
+				user.setUserName(rs.getString(3));
+				user.setEmail(rs.getString(4));
+				System.out.println("데이터 입력 후 : " + user);
+			}
+
+			} catch(Exception e){
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+					rs.close();
+					pstmt.close();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return user;
+	} // getUserInfo() END.
 	
-}
+}// UserDAO END.

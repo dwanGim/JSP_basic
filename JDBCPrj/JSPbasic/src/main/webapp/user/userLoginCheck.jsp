@@ -1,3 +1,4 @@
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="com.ict.domain.UserVO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -7,9 +8,47 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String uId = request.getParameter("userId");
-	String uPw = request.getParameter("userPw");
+	String formId = request.getParameter("userId");
+	String formPw = request.getParameter("userPw");
+		
+	UserDAO dao = new UserDAO();
 	
+	UserVO user = dao.getUserInfo(formId);
+
+	String dbId = user.getUserId();
+	String dbPw = user.getUserPw();
+	String dbName = user.getUserName();
+	String dbEmail = user.getEmail();
+	
+	// 해당 아이디가 DB에 없을 경우 null이 저장되니까 dbId != null
+	if(dbId != null) {
+		
+		if(dbPw.equals(formPw)) {
+			session.setAttribute("s_id", dbId);
+			session.setAttribute("s_pw", dbPw);
+			response.sendRedirect("loginWelcome.jsp");
+		}else {
+			response.sendRedirect("userPwFail.jsp");
+		}	
+	} else {
+		response.sendRedirect("userIdFail.jsp");
+	}
+	
+
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+</body>
+</html>
+<%
+/*
 	String dbType = "com.mysql.cj.jdbc.Driver";
 	String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC";
 	String connectId = "root";
@@ -75,15 +114,5 @@
 			} catch(Exception e) {
 			e.printStackTrace();
 			}
+*/
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-
-</body>
-</html>
