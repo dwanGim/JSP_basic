@@ -132,4 +132,110 @@ public class UserDAO {
 			return user;
 	} // getUserInfo() END.
 	
+	// 유저 탈퇴기능을 DAo로 옮겨서 만들겠습니다.
+	// 유저 탈퇴 시 입력받는 자료가 user_id이고
+	// DELETE 구문은 결과자료가 없습니다. 따라서 리턴자료형을 맞게 적어주시면 됩니다.
+	
+	public void userDelete(String userId) {
+		Connection con = null;
+		
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			con = DriverManager.getConnection(connectUrl, connectId, connectPw);
+			String sql = "DELETE FROM userinfo where user_id = ?";
+			
+			
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.executeUpdate();
+			
+			} catch(Exception e){
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+					pstmt.close();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+		
+	} //userDelete END.
+	
+	public void userJoinCheck(String uId, String uPw, String uName, String uMail) {
+		
+		Connection con = null;
+		
+		PreparedStatement pstmt = null;
+
+		
+		try {
+			Class.forName(dbType);
+			
+			con = DriverManager.getConnection(connectUrl, connectId, connectPw);
+			
+			
+			String sql = "INSERT INTO userinfo VALUES(?, ?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, uId);
+			pstmt.setString(2, uPw);
+			pstmt.setString(3, uName);
+			pstmt.setString(4, uMail);
+			
+			pstmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	} // userJoinCheck END.
+	
+	public void userUpdateCheck(String updatePw, String updateName, String updateMail, String uId) {
+		Connection con = null;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(dbType);
+		
+			con = DriverManager.getConnection(connectUrl, connectId, connectPw);
+
+			String sql = "UPDATE userinfo SET user_pw = ?, user_name = ?, email = ? WHERE user_id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+		
+			
+			pstmt.setString(1, updatePw); 
+			pstmt.setString(2, updateName); 
+			pstmt.setString(3, updateMail);
+			pstmt.setString(4, uId);
+			pstmt.executeUpdate();
+		} catch(Exception e){
+			e.printStackTrace();
+		}	finally {
+			try {
+				pstmt.close();
+				con.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		
+	} // userUpdateCheck END.
+	
 }// UserDAO END.
+
+

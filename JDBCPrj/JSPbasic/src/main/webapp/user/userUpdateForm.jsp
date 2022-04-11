@@ -1,3 +1,5 @@
+<%@page import="com.ict.domain.UserDAO"%>
+<%@page import="com.ict.domain.UserVO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -16,6 +18,10 @@
 	response.sendRedirect("userLoginForm.jsp");
 	}
 	
+	UserDAO dao = new UserDAO();
+	
+	UserVO user = dao.getUserInfo(uId);
+/*	
 	String dbType = "com.mysql.cj.jdbc.Driver";
 	String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?severTimezone=UTC";
 	String connectId = "root";
@@ -45,7 +51,7 @@
 		e.printStackTrace();
 	}
 	
-	
+*/	
 %>
 <!DOCTYPE html>
 <html>
@@ -57,7 +63,7 @@
 	<row>
 		<div class="col=sm=6">
 			<% 			%>
-			<p><strong><%=rs.getString(1)%> 회원님,  정보 수정을 하시겠습니까?</strong></p><br/>
+			<p><strong><%= user.getUserId() %> 회원님,  정보 수정을 하시겠습니까?</strong></p><br/>
 
 
 		</div>
@@ -65,10 +71,10 @@
 	<row>
 		<div class="col-sm-6">
 		<form action="userUpdateCheck.jsp" method="post">
-			<input type="hidden" name="userId" value = "<%=rs.getString(1) %>">
+			<input type="hidden" name="userId" value = "<%=user.getUserId() %>">
 			비밀번호 : <input type="password" name="userPw" placeholder="수정할 비밀번호를 입력해주세요." class="form-control form-control-lg">
-			이름 : <input type="text" name="userName" placeholder="수정할 이름을 입력해주세요." value = "<%= rs.getString(3) %>" class="form-control form-control-lg">
-			이메일 : <input type="text" name="userMail" value ="<%=rs.getString(4) %>"placeholder="수정할 이메일을 입력해주세요." class="form-control form-control-lg">
+			이름 : <input type="text" name="userName" placeholder="수정할 이름을 입력해주세요." value = "<%= user.getUserName() %>" class="form-control form-control-lg">
+			이메일 : <input type="text" name="userMail" value ="<%= user.getEmail() %>"placeholder="수정할 이메일을 입력해주세요." class="form-control form-control-lg">
 			<input type="submit" value="수정하기" class="btn btn-primary mb-3">
 			<a href="userLoginForm.jsp">뒤로가기</a>
 		</form>

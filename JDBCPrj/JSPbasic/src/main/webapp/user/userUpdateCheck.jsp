@@ -1,3 +1,4 @@
+<%@page import="com.ict.domain.UserDAO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
@@ -18,7 +19,10 @@
 	String updateName = request.getParameter("userName");
 	String updateMail = request.getParameter("userMail");
 	
+	UserDAO dao = new UserDAO();
+	dao.userUpdateCheck(updatePw, updateName, updateMail, uId);
 	
+/*	
 	String dbType = "com.mysql.cj.jdbc.Driver";
 	String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?severTimezone=UTC";
 	String connectId = "root";
@@ -43,7 +47,7 @@
 	} catch(Exception e){
 		e.printStackTrace();
 	}
-	
+	*/
 %>
 <!DOCTYPE html>
 <html>
