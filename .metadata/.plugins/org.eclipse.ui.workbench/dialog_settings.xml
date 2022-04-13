@@ -13,6 +13,7 @@
 	<section name="ZipFileImportWizard">
 		<item key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="true"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\user\Downloads\20220412.zip"/>
 			<item value="C:\Users\user\Downloads\20220411.zip"/>
 			<item value="C:\Users\user\Downloads\20220408.zip"/>
 			<item value="C:\Users\user\Downloads\20220407.zip"/>
