@@ -46,7 +46,7 @@ public class BoardDAO {
 		
 		try {
 			con = ds.getConnection();
-			String sql = "SELECT * FROM boardTbl";
+			String sql = "SELECT * FROM boardTbl ORDER BY board_num DESC";
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -54,7 +54,7 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardVO board = new BoardVO();
 				
-				System.out.println("집어넣기 전 : " + board);
+				
 				board.setBoardNum(rs.getInt(1));
 				board.setTitle(rs.getString(2));
 				board.setContent(rs.getString(3));
@@ -63,11 +63,11 @@ public class BoardDAO {
 				board.setmDate(rs.getDate(6));
 				board.setHit(rs.getInt(7));
 				
-				System.out.println("집어넣은 후 : " + board);
+				
 				boardList.add(board);
 				
 			}
-			System.out.println("리스트에 쌓인 자료 체크 : " + boardList);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -86,4 +86,138 @@ public class BoardDAO {
 	} // getAllUserList() END.
 	
 
-}
+	
+	
+	
+	// boardTbl에서 row를 1개 가져오거ㅏ(글 번호 존재 시), 안 가져옴(없는 글 번호 입력 시)
+	public BoardVO getBoardDetail(int boardNum) {
+
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		
+		BoardVO board = new BoardVO();
+		
+		try {
+			con = ds.getConnection();
+			String sql = "SELECT * FROM boardTbl WHERE board_num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, boardNum);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board.setBoardNum(rs.getInt(1));
+				board.setTitle(rs.getString(2));
+				board.setContent(rs.getString(3));
+				board.setWriter(rs.getString(4));
+				board.setbDate(rs.getDate(5));
+				board.setmDate(rs.getDate(6));
+				board.setHit(rs.getInt(7));
+				System.out.println("데이터 확인용 : " + board);
+			} else {
+				System.out.println("해당 계정이 없습니다.");
+			}
+			
+			
+			} catch(Exception e){
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+					rs.close();
+					pstmt.close();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return board;
+	} // getBoardDetail(String boardNum) END.
+	
+	public void boardInsert(String title, String content, String writer) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			
+			String sql = "INSERT INTO boardTbl (title, content, writer) VALUES (?, ?, ?)";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, writer);
+			System.out.println(title);
+			System.out.println(writer);
+			System.out.println(content);
+			
+			System.out.println(sql);
+			pstmt.executeUpdate();
+			System.out.println("리스트 업데이트 완료");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	} // boardInsert() END.
+	
+	public void boardDelete(int boardNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			String sql = "DELETE FROM boardTbl WHERE board_num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNum);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+				}catch(Exception e) {
+				e.printStackTrace();
+				}
+		}
+	} //boardDelete END.
+	
+	public void boardUpdate(String title, String content, int boardNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			String sql = "UPDATE boardTbl SET title = ?, content = ?, mdate = now() WHERE board_num = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, boardNum);
+			
+			System.out.println(sql);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+				pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	} //  boardUpdate END.
+	
+	
+	
+} // BoardDAO END.
+

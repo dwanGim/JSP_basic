@@ -1,4 +1,4 @@
-<%@page import="kr.co.ict.getBoardList"%>
+<%@page import="kr.co.ict.GetBoardList"%>
 <%@page import="kr.co.ict.domain.BoardVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.co.ict.domain.BoardDAO"%>
@@ -30,7 +30,7 @@
 				<c:forEach var="board" items="${boardList}">
 					<tr>
 						<td>${board.boardNum}</td>
-						<td>${board.title}</td>
+						<td><a href="http://localhost:8181/MyFirstWeb/boardDetail?board_num=${board.boardNum}">${board.title}</a></td>
 						<td>${board.writer}</td>
 						<td>${board.bDate}</td>
 						<td>${board.mDate}</td>
@@ -39,6 +39,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<a href="http://localhost:8181/MyFirstWeb/boardInsertForm" class="btn btn-primary btn-mb-1">글쓰기</a>
 	</div>
 </div>
 </body>
