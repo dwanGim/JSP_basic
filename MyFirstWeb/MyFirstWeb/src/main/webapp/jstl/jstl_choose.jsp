@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%request.setCharacterEncoding("UTF-8"); %>
-
+<%-- 상단에 jstl사용을 위해 taglib 선언부터 합니다. --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,19 +10,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="col-sm-8">
-		<c:set var="lang" value="${ param.lang}" />
-		<c:choose>
-			<c:when test="${lang eq '자바' }">
-				<p>자바 재밌습니다.</p>
-			</c:when>
-			<c:when test="${lang eq '파이썬'}">
-				<c:out value="와 파이썬 아시는구나" />
-			</c:when>
-			<c:otherwise>
-				<p>다른 건 모르겠습니다.</p>
-			</c:otherwise>
-		</c:choose>
-	</div>
+	<!-- c:choose를 이용해서 "자바" 가 들어온 경우
+	"스프링부트로 배민에서 웹 개발을 합니다."
+	"파이썬" 이 들어오는 경우 "장고로 요기요에서 웹 개발을 합니다."
+	otherwise는 "php로 웹개발합니다." 가 출력되도록 아래에 코드를 작성해 저에게 1:1로 보내주세요. -->
+	<c:choose>
+		<c:when test="${param.lang eq '자바' }">
+			<c:out value="스프링부트로 배민에서 웹 개발을합니다." />
+		</c:when>
+		<c:when test="${param.lang eq '파이썬' }">
+			<c:out value="요기요에서 장고로 웹 개발을 합니다." />
+		</c:when>
+		<c:otherwise>
+			<c:out value="php로 웹개발합니다." />
+		</c:otherwise>
+	</c:choose>
+	
 </body>
 </html>

@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.ict.domain.BoardDAO;
-
 /**
  * Servlet implementation class BoardUpdate
  */
@@ -28,18 +26,12 @@ public class BoardUpdate extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String boardNum = request.getParameter("board_num");
+		String writer = request.getParameter("writer");
+		System.out.println(title + ", " + content + ", " + writer);
 		
-		System.out.println(title + content + boardNum);
 		
-		BoardDAO dao = BoardDAO.getInstance();
-		
-		dao.boardUpdate(title, content, Integer.parseInt(boardNum));
-		
-		response.sendRedirect("http://localhost:8181/MyFirstWeb/boardList");
 	}
 
 }

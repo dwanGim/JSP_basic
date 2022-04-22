@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- jstl_choose.jsp를 목적지로 하는 form태그를 만들어보겠습니다. -->
-	<div class="col-sm-10">
-		<form action="jstl_choose.jsp" method="post">
-			<input type="text" name="lang" placeholder="사용 언어를 입력해주세요." class="form-control-lg"><br/>
-			<input type="submit" value="확인" class="btn btn-primary mb-2"><br/>
-		</form>
-	</div>
-
+	<!-- jstl_choose.jsp로 목적지를 잡고
+	사용 언어를 입력할 수 있는 input태그를 이용해 lang을 넘기면 됩니다. 
+	post방식으로 보냅니다.-->
+	<form action="jstl_choose.jsp" method="post">
+		사용 언어 : <input type="text" name="lang"><br/>
+		<input type="submit" value="제출">
+	</form>
+	
+	
 </body>
 </html>

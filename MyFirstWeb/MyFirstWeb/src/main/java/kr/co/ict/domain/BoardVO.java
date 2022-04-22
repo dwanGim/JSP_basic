@@ -3,10 +3,9 @@ package kr.co.ict.domain;
 import java.sql.Date;
 
 public class BoardVO {
-	// datetime 자료형을 갖는 컬럼은 date 자료형(java.sql.Date)를 선언하면 됩니다.
-	// boardTbl 테이블에 맞는  VO를 만들기 위해 컬럼별로 변수를 선언해주세요.
-	// getter, sette, toString을 생성도 하겠습니다.
-
+	// datetime 자료형을 갖는 컬럼은 Date 자료형(java.sql.Date) 을 선언하면됩니다.
+	// boardTbl 테이블에 맞는 VO를 만들기 위해 컬럼별로 변수를 선언해주세요.
+	// getter, setter, toString도 생성해주세요.
 	private int boardNum;
 	private String title;
 	private String content;
@@ -14,13 +13,7 @@ public class BoardVO {
 	private Date bDate;
 	private Date mDate;
 	private int hit;
-	
-	@Override
-	public String toString() {
-		return "BoardVO [boardNum=" + boardNum + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", bDate=" + bDate + ", mDate=" + mDate + ", hit=" + hit + "]";
-	}
-	
+	// 우클릭 -> Source -> generate getter/setter->모든변수선택, 생성
 	public int getBoardNum() {
 		return boardNum;
 	}
@@ -63,7 +56,11 @@ public class BoardVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	
-	
+	// 우클릭 -> source -> generate toString -> 그 상태로 바로 생성
+	@Override
+	public String toString() {
+		return "BoardVO [boardNum=" + boardNum + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", bDate=" + bDate + ", mDate=" + mDate + ", hit=" + hit + "]";
+	}
 	
 }

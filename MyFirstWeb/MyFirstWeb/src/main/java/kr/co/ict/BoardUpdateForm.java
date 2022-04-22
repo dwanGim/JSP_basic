@@ -31,18 +31,28 @@ public class BoardUpdateForm extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String boardNum = request.getParameter("board_num");
+		String strBoardNum = request.getParameter("board_num");
+		int boardNum = Integer.parseInt(strBoardNum);
+		
+		// dao생성
 		BoardDAO dao = BoardDAO.getInstance();
-		BoardVO board = dao.getBoardDetail(Integer.parseInt(boardNum));
+		// 데이터 얻어오기
+		BoardVO board = dao.getBoardDetail(boardNum);
 		
+		// 바인딩
 		request.setAttribute("board", board);
-		System.out.println(board);
-		
+		// 포워딩
 		RequestDispatcher dp = request.getRequestDispatcher("/board/boardUpdateForm.jsp");
-		
 		dp.forward(request, response);
-	
 	}
-
 }
+
+
+
+
+
+
+
+
+
+

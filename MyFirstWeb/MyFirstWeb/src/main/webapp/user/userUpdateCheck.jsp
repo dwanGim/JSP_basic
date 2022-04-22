@@ -4,50 +4,24 @@
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <%
-	request.setCharacterEncoding("UTF-8");
+	// userUpdateForm.jsp에서 날려주는 데이터를 받아주세요.
+	// 단, 이름에 한글이 포함될 수 있으므로 utf-8로 바꾸는걸 먼저 하고 그 다음 받아주세요.
+	request.setCharacterEncoding("utf-8");
+	String fId = request.getParameter("fId");
+	String fPw = request.getParameter("fPw");
+	String fName = request.getParameter("fName");
+	String fEmail = request.getParameter("fEmail");
 	
-	String uId = request.getParameter("userId");	
-
-	if (uId == null) {
-	response.sendRedirect("userLoginForm.jsp");
-	}
-
-	
-	String updatePw = request.getParameter("userPw");
-	String updateName = request.getParameter("userName");
-	String updateMail = request.getParameter("userMail");
-	
+	// DAO를 생성해주세요.
 	UserDAO dao = UserDAO.getInstance();
-	dao.userUpdateCheck(updatePw, updateName, updateMail, uId);
 	
-/*	
-	String dbType = "com.mysql.cj.jdbc.Driver";
-	String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?severTimezone=UTC";
-	String connectId = "root";
-	String connectPw = "mysql";
+	// 가입로직을 실행해주세요.
+	dao.userUpdateCheck(fId, fPw, fName, fEmail);
+	
+	// 웰컴페이지로 돌아가기.
+	response.sendRedirect("loginWelcome.jsp");
 
-	
-	try {
-		Class.forName(dbType);
-	
-		Connection con = DriverManager.getConnection(connectUrl, connectId, connectPw);
-
-		String sql = "UPDATE userinfo SET user_pw = ?, user_name = ?, email = ? WHERE user_id = ?";
-		
-		PreparedStatement pstmt = con.prepareStatement(sql);
-	
-		
-		pstmt.setString(1, updatePw); 
-		pstmt.setString(2, updateName); 
-		pstmt.setString(3, updateMail);
-		pstmt.setString(4, uId);
-		pstmt.executeUpdate();
-	} catch(Exception e){
-		e.printStackTrace();
-	}
-	*/
 %>
 <!DOCTYPE html>
 <html>
@@ -56,11 +30,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<row>
-		<div class="col-sm-6">
-			<p><strong><%= uId %>님의 회원정보가 수정완료되었습니다.</strong></p>
-			<a href="loginWelcome.jsp">홈페이지로</a>
-		</div>
-	</row>
+
 </body>
 </html>
+<%
+/*
+String dbType = "com.mysql.cj.jdbc.Driver";
+String connectUrl = "jdbc:mysql://localhost:3306/jdbcprac2?serverTimezone=UTC";
+String connectId = "root";
+String connectPw = "mysql";
+
+try {
+	Class.forName(dbType);
+
+	Connection con = DriverManager.getConnection(connectUrl, connectId, connectPw);
+	// 3. 해당 아이디의 정보만 ResultSet에 받아와서
+	// 쿼리문은 SELECT * FROM userinfo WHERE user_id = 유저아이디;
+	String sql = 
+		"UPDATE userinfo SET user_pw=?, user_name=?, email=? WHERE user_id=?";
+	
+	PreparedStatement pstmt = con.prepareStatement(sql);
+	pstmt.setString(4, fId);
+	pstmt.setString(1, fPw);
+	pstmt.setString(2, fName);
+	pstmt.setString(3, fEmail);
+	
+	
+	pstmt.executeUpdate();// formId에 해당하는 계정정보(아이디, 패스워드, 이메일, 이름)
+} catch(Exception e){
+	e.printStackTrace();
+}
+*/
+%>

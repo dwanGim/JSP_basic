@@ -1,18 +1,16 @@
 package kr.co.ict.domain;
 
 public class UserVO {
-	// VO 클래스는 일반적으로 특정 테이블의 자료를 한 row 단위로 저장할 수 있도록
-	// 컬럼 정보를 변수로 나열한 것 입니다.
+	// VO클래스는 일반적으로 특정 테이블의 자료를 한 row단위로 저장할수있도록
+	// 컬럼정보를 변수로 나열한것입니다.
 	// 각 컬럼에 대응하는 변수를 선언해줍니다.
 	private String userId;
 	private String userPw;
 	private String userName;
-	private String Email;
+	private String email;
 	
-
-	// private로 선언했기 때문에 getter/setter를 생성합니다.
-	
-	
+	// getter/setter를 생성해주세요.
+	// 우클릭 -> Source -> generate getters and setters -> 모든 변수 체크 -> generate
 	public String getUserId() {
 		return userId;
 	}
@@ -32,21 +30,17 @@ public class UserVO {
 		this.userName = userName;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
-
-
-
-
 	// toString도 생성해주면, System.out.println()과 같은 조회구문에서
 	// 자료 주소값 대신 실제로 들어있는 데이터를 화면에 보여줍니다.
-	// 우클릭 => source => generateToString() 실행 => 모든 변수 선택 후 생성
+	// 우클릭 -> source -> generateToString() 실행 -> 모든변수 선택후 생성
 	@Override
 	public String toString() {
-		return "UserVO [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", Email=" + Email + "]";
+		return "UserVO [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", email=" + email + "]";
 	}
 	
 }

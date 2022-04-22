@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.ict.domain.BoardDAO;
 
 /**
- * Servlet implementation class BoradDelete
+ * Servlet implementation class BoardDelete
  */
 @WebServlet("/boardDelete")
 public class BoardDelete extends HttpServlet {
@@ -28,14 +28,29 @@ public class BoardDelete extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String boardNum = request.getParameter("board_num");
-		
+		String strBoardNum = 
+				request.getParameter("board_num");
+		int boardNum = Integer.parseInt(strBoardNum);
+		// dao생성
 		BoardDAO dao = BoardDAO.getInstance();
-		System.out.println(boardNum);
-		dao.boardDelete(Integer.parseInt(boardNum));
-	
+		// delete로직 호출
+		dao.boardDelete(boardNum);
+		// boardList로 리다이렉트
 		response.sendRedirect("http://localhost:8181/MyFirstWeb/boardList");
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

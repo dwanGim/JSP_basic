@@ -28,8 +28,8 @@ public class BoardInsertForm extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 엄밀히 말해 전달데이터가 없으므로(바인딩을 하지 않음) 리다이렉트로 처리해도 기능적인 차이는 없습니다.
-		// 리다이렉트로 처리할 경우 파일명이나 폴더구조가 일부 노출될 수 있어 포워딩을 했습니다.
+		// 엄밀히 말해 전달데이터가 없으므로(바인딩을 하지 않으므로) 리다이렉트로 처리해도 기능적으로 차이는 없으나
+		// 리다이렉트로 처리할 경우 파일명이나 폴더구조가 일부 노출될 수 있어 포워딩으로 처리.
 		RequestDispatcher dp = request.getRequestDispatcher("/board/boardInsertForm.jsp");
 		dp.forward(request, response);
 	}
