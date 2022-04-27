@@ -1,0 +1,14 @@
+package kr.co.hf.domain;
+
+public class PreviewVO {
+	private int previewID;
+	private int postID;
+	private String previewTitle;
+	private String previewContent;
+	private String previewLink;
+	
+	
+	
+	
+	
+}

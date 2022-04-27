@@ -1,5 +1,6 @@
 package kr.co.hf.domain;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class PreviewDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} // PreviewDAO END;
 	
 
 	
@@ -35,35 +36,44 @@ public class PreviewDAO {
 			dao = new PreviewDAO();
 		}
 		return dao;
-	}
+	} //  previewDAO getINstance() END;
 	
-	public List<PreviewVO> getPriviewList(){
+	
+	
+	public List<PreviewVO> getPriviewList(int postID){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		
 		List<PreviewVO> previewList = new ArrayList<>();
 		
 		try {
 			con = ds.getConnection();
-			String sql = "SELECT * FROM preview";
+			String sql = "SELECT * FROM preview WHERE postID =? ORDER BY postTime DESC";
 			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, postID);
 			
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				PreviewVO preview = new PreviewVO();
-				
-				preview.setPreviewID(rs.getInt(1));
-				preview.setPostID(rs.getInt(2));
-				preview.setPreviewContent(rs.getString(3));
-				preview.setPreviewLink(rs.getString(4));
-				
-				System.out.println("데이터 디버깅 : " + preview);
-				previewList.add(preview);
-				
+			for(int i = 0; i < 10; i++) {
+				if(rs.next()) {
+					PreviewVO preview = new PreviewVO();
+					
+					preview.setPreviewID(rs.getInt(1));
+					preview.setPostID(rs.getInt(2));
+					preview.setPreviewContent(rs.getString(3));
+					preview.setPreviewLink(rs.getString(4));
+					
+					System.out.println("데이터 디버깅 : " + preview);
+					previewList.add(preview);
+					
+				}
 			}
+			
 			System.out.println("리스트에 쌓인 자료 체크 : " + previewList);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -79,7 +89,9 @@ public class PreviewDAO {
 		return previewList;
 		
 		
-	} // getPreviewList() END.
+	} // getPreviewList() END;
+	
+
 	
 	
 	

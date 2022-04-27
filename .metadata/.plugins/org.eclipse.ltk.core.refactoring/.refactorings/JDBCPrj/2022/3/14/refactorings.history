@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com_ict.jdbc&apos; to &apos;com.ict.jdbc&apos;&#x0D;&#x0A;- Original project: &apos;JDBCPrj&apos;&#x0D;&#x0A;- Original element: &apos;JDBCPrj/src/main/java/com_ict.jdbc&apos;&#x0D;&#x0A;- Renamed element: &apos;JDBCPrj/src/main/java/com.ict.jdbc&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com_ict.jdbc&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java&lt;com_ict.jdbc" name="com.ict.jdbc" qualified="false" references="true" stamp="1648719239986" textual="false" version="1.0"/>
+</session>

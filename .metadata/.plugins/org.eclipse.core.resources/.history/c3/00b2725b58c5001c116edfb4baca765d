@@ -1,0 +1,16 @@
+package kr.co.hf.domain;
+
+import java.sql.Date;
+
+public class BoardVO {
+
+    private int postID;
+    private String postAuthor;
+    private String postTitle;
+    private Date postLastModified;
+    private Date postTime;
+    private String postContent;
+    private int viewCount;
+    private int postType;
+    
+}
