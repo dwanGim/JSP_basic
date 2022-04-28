@@ -8,4 +8,4 @@ text2.txt
 testfolder/
 
 # 이미 업로드된 파일은 .gitignore 영향을 안 받음
-test.txt
+text.txt
