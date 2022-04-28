@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Wed Apr 27 21:48:31 KST 2022
-org.eclipse.jst.jee.server\:HFprj=C\:\\apache-tomcat-9.0.60\\wtpwebapps\\HFprj
