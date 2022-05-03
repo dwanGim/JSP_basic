@@ -15,6 +15,7 @@
 		<form action="http://localhost:8181/MyFirstWeb/spring">
 			<input type="text" name="jsp" placeholder="jsp 값을 입력" class="form form-control-lg"><br/>
 			<input type="text" name="boot" placeholder="boot 값을 입력" class="form form-control-lg"><br/>
+			<input type="text" name="jpa" placeholder="jpa 값을 입력" class="form form-control-lg"><br/>
 			<input type="submit" value="확인" class="btn btn-success mb-2">
 		</form>
 	</div>

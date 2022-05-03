@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletCustom
  */
+
+// http://localhost:8181/MyFirstWeb/spring 이후 부분만 적으면 해당 주소로 접속 시
+// 현재 보고 있는 서블릿이 실행됩니다.
 @WebServlet("/spring")
 public class ServletCustom extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class ServletCustom extends HttpServlet {
 		
 		String js = request.getParameter("jsp");
 		String bo = request.getParameter("boot");
+		String jpa = request.getParameter("jpa");
 		
 		System.out.println(js);
 		System.out.println(bo);
@@ -62,13 +66,14 @@ public class ServletCustom extends HttpServlet {
 		// 포워딩 절차 1. 보내고 싶은 데이터를 request.setAttribute("저장명", 자료); 형식으로 저장
 		request.setAttribute("jsp", js);
 		request.setAttribute("boot", bo);
+		request.setAttribute("jpa", jpa);
 		
 		// request.setAttribute로 실어놓은 변수를 결과페이지로 보내기 위해 forward를 대신 사용합니다.
 		// 목적지 주소는 http://localhost:8181/MyFirstWeb을 생략한 나머지 주소만 적어도 좋습니다.
 		// 예)/servletForm/sprinResult.jsp
 		
 		// 포워딩 절차 2. RequestDispatcher 생성
-		RequestDispatcher dp = request.getRequestDispatcher("//servletForm/sprinResult.jsp");
+		RequestDispatcher dp = request.getRequestDispatcher("/servletForm/springResult.jsp");
 		// 포워딩 절차 3. forward(request, response); 실행하면 페이지가 넘어가면서 변수들도 함께 감. 김기태감독님 동행야구임.
 		dp.forward(request, response);
 	
@@ -78,8 +83,17 @@ public class ServletCustom extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("post방식 접근 감지");
+		request.setCharacterEncoding("utf-8");
+		String jsp = request.getParameter("jsp");
+		String boot = request.getParameter("boot");
+		String jpa = request.getParameter("jpa");
+		request.setAttribute("jsp", jsp);
+		request.setAttribute("boot", boot);
+		request.setAttribute("jpa", jpa);
+		
+		RequestDispatcher dp = request.getRequestDispatcher("/servletForm/springResult.jsp");
+		dp.forward(request, response);
 	}
 
 }
